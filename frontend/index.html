@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Career Compass - AI-Powered Career Guidance for 10th & 12th Students</title>
+  <meta name="description" content="Career Compass - AI-driven career counselling website for students after 10th and 12th standard. 10 adaptive questions, top 3 degree course recommendations, top 2 intermediate stream guidance.">
+  <link rel="icon" type="image/svg+xml" href="assets/logo-icon.svg">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              blue: '#2563EB',
+              lightBlue: '#60A5FA',
+              skyBg: '#F5F9FF',
+              navy: '#14213D'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Poppins', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Inter & Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-[#F5F9FF] text-[#14213D] min-h-screen flex flex-col font-sans antialiased selection:bg-blue-500 selection:text-white">
+
+  <!-- Main Navigation Header -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-18">
+        
+        <!-- Logo & Tagline -->
+        <div class="flex items-center gap-3 cursor-pointer" onclick="window.App.navigateTo('landing')">
+          <div class="w-11 h-11 rounded-2xl overflow-hidden shadow-royal flex items-center justify-center bg-white transform hover:scale-105 transition duration-200">
+            <img src="assets/logo-icon.svg" alt="Career Compass Logo" class="w-full h-full object-cover">
+          </div>
+          <div>
+            <div class="font-extrabold text-2xl text-[#14213D] tracking-tight leading-none flex items-center gap-1.5 font-heading">
+              <span>Career <span class="text-blue-600">Compass</span></span>
+              <span class="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-blue-100 text-blue-700 tracking-normal">AI</span>
+            </div>
+            <div class="text-[11px] font-medium text-slate-500 tracking-wide mt-0.5 hidden sm:block">
+              Discover Your Interests. Explore Your Future.
+            </div>
+          </div>
+        </div>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center gap-7 text-sm font-semibold text-slate-600">
+          <a href="#landing" onclick="window.App.navigateTo('landing')" class="hover:text-blue-600 transition">Home</a>
+          <a href="#education-select" onclick="window.App.navigateTo('education-select')" class="hover:text-blue-600 transition">Assessment</a>
+          <a href="#explore-careers" onclick="window.App.navigateTo('explore-careers')" class="hover:text-blue-600 transition">Explore Careers (40+)</a>
+          <a href="#about" onclick="window.App.navigateTo('about')" class="hover:text-blue-600 transition">How It Works</a>
+        </nav>
+
+        <!-- Right Side: AI Engine Settings & CTA -->
+        <div class="flex items-center gap-3">
+          
+          <!-- AI Engine Settings Pill -->
+          <button 
+            onclick="window.App.openSettingsModal()" 
+            title="Configure AI Engine / Gemini API Key"
+            class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:border-blue-300 transition cursor-pointer"
+          >
+            <span class="w-2 h-2 rounded-full bg-emerald-500 pulse-active"></span>
+            <span id="header-ai-status">AI Engine</span>
+            <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+          </button>
+
+          <!-- Primary CTA Button -->
+          <button 
+            onclick="window.App.navigateTo('education-select')" 
+            class="px-4.5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-royal transition transform active:scale-95 cursor-pointer"
+          >
+            Start Assessment
+          </button>
+
+          <!-- Mobile Hamburger Menu Button -->
+          <button 
+            onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" 
+            class="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- Mobile Dropdown Menu -->
+      <div id="mobile-menu" class="hidden md:hidden pb-4 pt-2 border-t border-slate-100 flex flex-col gap-3 text-sm font-semibold text-slate-700">
+        <a href="#landing" onclick="window.App.navigateTo('landing'); document.getElementById('mobile-menu').classList.add('hidden')" class="px-2 py-1.5 hover:text-blue-600">Home</a>
+        <a href="#education-select" onclick="window.App.navigateTo('education-select'); document.getElementById('mobile-menu').classList.add('hidden')" class="px-2 py-1.5 hover:text-blue-600">Start Assessment</a>
+        <a href="#explore-careers" onclick="window.App.navigateTo('explore-careers'); document.getElementById('mobile-menu').classList.add('hidden')" class="px-2 py-1.5 hover:text-blue-600">Explore Careers (40+)</a>
+        <a href="#about" onclick="window.App.navigateTo('about'); document.getElementById('mobile-menu').classList.add('hidden')" class="px-2 py-1.5 hover:text-blue-600">How It Works</a>
+        <button onclick="window.App.openSettingsModal(); document.getElementById('mobile-menu').classList.add('hidden')" class="text-left px-2 py-1.5 text-blue-600">Configure AI Settings</button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Application Content Root -->
+  <main id="app-root" class="flex-1">
+    <!-- Rendered dynamically by window.App -->
+    <div class="min-h-[60vh] flex items-center justify-center">
+      <div class="text-center space-y-3">
+        <div class="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+        <p class="text-sm font-semibold text-slate-500">Loading Career Compass...</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="fixed bottom-6 right-6 z-50 pointer-events-none"></div>
+
+  <!-- Global Footer -->
+  <footer class="bg-white border-t border-slate-200 mt-auto text-slate-600 text-xs sm:text-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        
+        <!-- Col 1: Brand Info -->
+        <div class="md:col-span-2 space-y-3">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-xl overflow-hidden shadow-xs flex items-center justify-center bg-white">
+              <img src="assets/logo-icon.svg" alt="Career Compass Logo" class="w-full h-full object-cover">
+            </div>
+            <span class="font-extrabold text-lg text-[#14213D] tracking-wide font-heading">Career <span class="text-blue-600">Compass</span></span>
+          </div>
+          <p class="text-xs text-slate-500 leading-relaxed max-w-sm">
+            AI-powered conversational career counsellor helping 10th and 12th standard students explore academic streams and degree courses through adaptive interest discovery.
+          </p>
+          <div class="text-[11px] text-blue-700 font-bold">
+            Tagline: "Discover Your Interests. Explore Your Future."
+          </div>
+        </div>
+
+        <!-- Col 2: Pathways -->
+        <div>
+          <h5 class="font-bold text-slate-900 text-xs uppercase tracking-wider mb-3">Assessment Pathways</h5>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#education-select" onclick="window.App.startAssessmentSession('10th')" class="hover:text-blue-600">10th Pass &bull; Intermediate Streams</a></li>
+            <li><a href="#education-select" onclick="window.App.startAssessmentSession('12th')" class="hover:text-blue-600">12th Pass &bull; Degree Courses</a></li>
+            <li><a href="#explore-careers" onclick="window.App.navigateTo('explore-careers')" class="hover:text-blue-600">40 Specialized Career Fields</a></li>
+            <li><a href="#explore-careers" onclick="window.App.navigateTo('explore-careers')" class="hover:text-blue-600">5 Academic Streams Database</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Resources -->
+        <div>
+          <h5 class="font-bold text-slate-900 text-xs uppercase tracking-wider mb-3">Platform</h5>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#about" onclick="window.App.navigateTo('about')" class="hover:text-blue-600">Methodology & Ethics</a></li>
+            <li><a href="#about" onclick="window.App.navigateTo('about')" class="hover:text-blue-600">Advisory Disclaimer</a></li>
+            <li><a href="javascript:void(0)" onclick="window.App.openSettingsModal()" class="hover:text-blue-600">AI Engine Settings</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        <div>
+          &copy; 2026 Career Compass. Professional educational technology platform. All rights reserved.
+        </div>
+        <div class="text-[11px] text-slate-400 max-w-lg text-center sm:text-right">
+          Career guidance recommendations are AI estimates based on self-reported inputs and do not guarantee university admission or employment.
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Scripts in order -->
+  <script src="js/data/careerData.js"></script>
+  <script src="js/services/api.js"></script>
+  <script src="js/services/pdfExport.js"></script>
+  <script src="js/components/LandingPage.js"></script>
+  <script src="js/components/EducationSelectPage.js"></script>
+  <script src="js/components/ChatbotPage.js"></script>
+  <script src="js/components/ResultsPage.js"></script>
+  <script src="js/components/CompareModal.js"></script>
+  <script src="js/components/ExploreCareersPage.js"></script>
+  <script src="js/components/AboutPage.js"></script>
+  <script src="js/components/SettingsModal.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
