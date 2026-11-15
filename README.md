@@ -4,6 +4,10 @@
 
 A modern, responsive, educational technology platform that provides conversational AI career counselling for students who have completed **Class 10** or **Class 12**.
 
+The platform is available in two production architectures:
+1. **Next.js Fullstack (App Router + TypeScript + Tailwind CSS)**: Modern React fullstack implementation with native Next.js Route Handlers.
+2. **Python / Flask Backend + Vanilla SPA Frontend**: Lightweight Python backend with SQLite persistence and responsive web client.
+
 ---
 
 ## 🌟 Key Capabilities & Features
@@ -16,19 +20,19 @@ A modern, responsive, educational technology platform that provides conversation
 * Conducts an adaptive dialogue of **10 questions, one at a time**.
 * Dynamically synthesizes follow-up questions from the student's previous answers (e.g., if a student mentions drawing, it probes digital UI/UX vs architectural blueprints vs 3D animation).
 * Dual input mode: interactive **suggested quick-reply pills** PLUS an open text box for custom answers.
-* Real-time progress bar (`Question X of 10`), typing indicator animation, live student profile sidebar.
+* Real-time progress bar (`Question X of 10`), typing indicator animation, and live student profile updates.
 * **Review & Rollback**: Allows students to go back to previous questions or restart anytime.
 
 ### 3. Comprehensive Output & Reporting
 * **Top 3 Degree Cards (12th)**: Degree title, AI fit percentage, personalized rationale, key curriculum subjects, course duration, entrance examinations (JEE, NEET, CUET, CLAT, NATA, etc.), salary ranges (with industry caveats), and postgraduate specializations.
 * **Top 2 Stream Cards (10th)**: Stream name, subject combinations, academic rigor, board variations (CBSE, ICSE, State Boards), key advantages, subjects requiring particular attention, and future career doors.
-* **Side-by-Side Comparison**: Compare the top recommendations across eligibility, syllabus, difficulty, and salary.
+* **Side-by-Side Comparison**: Compare the top recommendations across eligibility, syllabus, difficulty, and career pathways.
 * **Download Career Report as PDF**: Print-ready, branded executive career assessment report including transcript and disclaimer.
 * **Explore Careers Directory**: Searchable, domain-filtered library of all 40 undergraduate categories and 5 academic streams.
 
 ### 4. Dual AI Inference Engine
-* **Cloud Mode (Google Gemini API)**: Plug in your Gemini API key (e.g., `gemini-2.5-flash`) via the built-in UI Settings Modal or `.env` / database. Keys are stored securely server-side and never exposed to client scripts.
-* **Intelligent Local Engine**: When running offline or without an API key, our built-in natural language semantic engine provides full 10-question adaptive dialogues and eligibility matrix mapping.
+* **Cloud Mode (Google Gemini API)**: Plug in your Gemini API key (e.g., `gemini-2.5-flash`) via the built-in UI Settings Modal or `.env`. Keys are stored securely server-side.
+* **Intelligent Local Engine**: When running offline or without an API key, the built-in natural language semantic engine provides full 10-question adaptive dialogues and eligibility matrix mapping.
 
 ---
 
@@ -38,7 +42,7 @@ A modern, responsive, educational technology platform that provides conversation
 * **Secondary Color**: Light Blue (`#60A5FA`)
 * **Background**: Very light blue tint (`#F5F9FF`) & pure white (`#FFFFFF`)
 * **Text**: Dark Navy (`#14213D`)
-* **Typography**: Inter (UI prose) & Poppins (Headings)
+* **Typography**: Inter & Poppins
 * Modern glassmorphism, soft drop shadows (`shadow-royal`), card hover lift effects, and responsive mobile-first layouts.
 
 ---
@@ -47,45 +51,41 @@ A modern, responsive, educational technology platform that provides conversation
 
 ```
 career-compass/
-├── backend/
-│   ├── app.py                # Flask application entry point (`flask run`)
-│   ├── server.py             # Flask REST API server & static file host
-│   ├── ai_service.py         # Gemini API client & intelligent decision engine
-│   ├── database.py           # SQLite database for sessions & configuration
-│   ├── career_data.py        # 40 categories & 5 streams structured database
-│   └── career_compass.db     # Local SQLite database (auto-created)
-├── frontend/
-│   ├── index.html            # Main single-page application entry point
-│   ├── css/
-│   │   └── style.css         # Theme colors, typing animations, print stylesheet
-│   └── js/
-│       ├── app.js            # Router, state manager & coordinator
-│       ├── data/
-│       │   └── careerData.js # Client-side career database mirror
-│       ├── services/
-│       │   ├── api.js        # REST API client
-│       │   └── pdfExport.js  # Executive PDF career report generator
-│       └── components/
-│           ├── LandingPage.js
-│           ├── EducationSelectPage.js
-│           ├── ChatbotPage.js
-│           ├── ResultsPage.js
-│           ├── CompareModal.js
-│           ├── ExploreCareersPage.js
-│           ├── AboutPage.js
-│           └── SettingsModal.js
-├── requirements.txt          # Python dependencies (Flask >= 3.1)
-├── start.bat                 # Windows one-click launcher
-├── run.ps1                   # PowerShell launcher
-└── README.md
-```
-│           ├── ResultsPage.js
-│           ├── CompareModal.js
-│           ├── ExploreCareersPage.js
-│           ├── AboutPage.js
-│           └── SettingsModal.js
-├── start.bat                 # Windows one-click launcher
-├── run.ps1                   # PowerShell launcher
+├── nextjs/                   # ★ NEXT.JS FULLSTACK IMPLEMENTATION
+│   ├── app/
+│   │   ├── api/              # Next.js Route Handlers (API Backend)
+│   │   │   ├── chat/start/   # POST: Initialize assessment session
+│   │   │   ├── chat/message/ # POST: Adaptive question & recommendation engine
+│   │   │   ├── chat/previous/# POST: Rollback to previous question
+│   │   │   ├── config/       # GET/POST: AI engine status & key config
+│   │   │   ├── categories/   # GET: 40 categories & 5 streams
+│   │   │   └── sessions/     # GET: Assessment history
+│   │   ├── layout.tsx        # Next.js Root Layout with metadata & fonts
+│   │   ├── page.tsx          # Complete interactive Career Compass client app
+│   │   └── globals.css       # Tailwind CSS & global styles
+│   ├── lib/
+│   │   ├── types.ts          # TypeScript domain interfaces & types
+│   │   ├── career-data.ts    # 40 categories & 5 streams data dictionary
+│   │   ├── database.ts       # File-based JSON persistence (.data/)
+│   │   └── ai-service.ts     # Gemini Flash API + 10-step adaptive engine
+│   ├── public/assets/        # Vector logo & compass icons
+│   ├── package.json          # Next.js 14, React 18, Tailwind, TypeScript
+│   ├── tsconfig.json         # TypeScript configuration
+│   └── .env.example          # Environment variable template
+├── backend/                  # PYTHON / FLASK BACKEND
+│   ├── server.py             # Flask REST API server & static host
+│   ├── app.py                # WSGI entry point
+│   ├── ai_service.py         # Gemini API & Python decision engine
+│   ├── database.py           # SQLite database for sessions & settings
+│   └── career_data.py        # Python career & stream database
+├── frontend/                 # VANILLA SPA FRONTEND (used with Flask)
+│   ├── index.html            # Single-page application entry point
+│   ├── css/style.css         # Theme styles & animations
+│   └── js/                   # Modular ES6 components & services
+├── start-next.bat            # One-click launcher for Next.js (Windows)
+├── run-next.ps1              # PowerShell launcher for Next.js
+├── start.bat                 # One-click launcher for Flask (Windows)
+├── run.ps1                   # PowerShell launcher for Flask
 └── README.md
 ```
 
@@ -93,10 +93,35 @@ career-compass/
 
 ## 🚀 How to Run the Website
 
-### Option 1: One-Click Launcher (Windows)
-Double-click `start.bat` in the project root folder. It will start the server on port `8000` and automatically open `http://localhost:8000` in your default web browser.
+### Option A: Next.js (Fullstack App Router)
 
-### Option 2: Command Line (PowerShell)
+**Prerequisite:** [Node.js](https://nodejs.org/) (v18 or higher).
+
+#### Method 1: One-Click Launcher (Windows)
+Double-click **`start-next.bat`** in the project root folder. It will:
+1. Verify Node.js is installed.
+2. Install npm dependencies if not already installed (`npm install`).
+3. Start the Next.js development server on `http://localhost:8000`.
+4. Automatically open your web browser.
+
+#### Method 2: Command Line (PowerShell / Terminal)
+```powershell
+cd "C:\Users\Neela Bhavani\.gemini\antigravity\scratch\career-compass\nextjs"
+npm install
+npm run dev
+```
+Then visit `http://localhost:8000` in your web browser.
+
+---
+
+### Option B: Python / Flask Backend
+
+**Prerequisite:** Python 3.10+ installed.
+
+#### Method 1: One-Click Launcher (Windows)
+Double-click **`start.bat`** in the project root folder.
+
+#### Method 2: Command Line (PowerShell)
 ```powershell
 cd "C:\Users\Neela Bhavani\.gemini\antigravity\scratch\career-compass\backend"
 python server.py 8000
@@ -108,10 +133,13 @@ Then visit `http://localhost:8000` in your web browser.
 ## 🔑 Configuring Google Gemini API (Optional)
 
 1. Open `http://localhost:8000` in your browser.
-2. Click the **"AI Engine"** button in the top navigation bar.
-3. Paste your Google Gemini API key (obtainable free from [Google AI Studio](https://aistudio.google.com/app/apikey)).
-4. Click **"Save & Connect"**. The status indicator will turn green, and all questions will be generated live using `gemini-2.5-flash`.
-*(If no key is provided, the platform seamlessly uses the high-precision built-in semantic engine.)*
+2. For Next.js: create a `.env.local` file inside `nextjs/`:
+   ```env
+   GEMINI_API_KEY=your_gemini_api_key_here
+   ```
+   Or set it in the UI Settings dialog.
+3. Free keys are available from [Google AI Studio](https://aistudio.google.com/app/apikey).
+*(If no API key is provided, the platform automatically runs with the high-precision offline semantic reasoning engine!)*
 
 ---
 

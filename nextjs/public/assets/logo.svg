@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 160" width="640" height="160">
+  <defs>
+    <!-- Background Gradient for Emblem -->
+    <linearGradient id="emblemBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563EB" />
+      <stop offset="60%" stop-color="#1D4ED8" />
+      <stop offset="100%" stop-color="#1E3A8A" />
+    </linearGradient>
+
+    <!-- Ring Gradient -->
+    <linearGradient id="ringGradLg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60A5FA" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#93C5FD" stop-opacity="0.3" />
+    </linearGradient>
+
+    <!-- Needle North Facets -->
+    <linearGradient id="needleNorthLightLg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#0284C7" />
+    </linearGradient>
+
+    <linearGradient id="needleNorthDarkLg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60A5FA" />
+      <stop offset="100%" stop-color="#2563EB" />
+    </linearGradient>
+
+    <!-- Needle South Facets -->
+    <linearGradient id="needleSouthLightLg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8FAFC" />
+      <stop offset="100%" stop-color="#E2E8F0" />
+    </linearGradient>
+
+    <linearGradient id="needleSouthDarkLg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#CBD5E1" />
+      <stop offset="100%" stop-color="#94A3B8" />
+    </linearGradient>
+
+    <!-- Star Glow -->
+    <filter id="starGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <filter id="emblemShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#1E3A8A" flood-opacity="0.25" />
+    </filter>
+  </defs>
+
+  <!-- ==================== EMBLEM (Left: Center at 80, 80) ==================== -->
+  <g transform="translate(16, 16)">
+    <!-- Rounded Squircle Base (128x128) -->
+    <rect x="0" y="0" width="128" height="128" rx="34" fill="url(#emblemBg)" filter="url(#emblemShadow)" />
+
+    <!-- Outer Rim -->
+    <circle cx="64" cy="64" r="46" fill="none" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="2" />
+    <!-- Inner Dotted Horizon -->
+    <circle cx="64" cy="64" r="52" fill="none" stroke="url(#ringGradLg)" stroke-width="1.5" stroke-dasharray="3 4" opacity="0.6" />
+
+    <!-- Cardinal Ticks -->
+    <line x1="64" y1="20" x2="64" y2="26" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.8" />
+    <line x1="64" y1="102" x2="64" y2="108" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.4" />
+    <line x1="108" y1="64" x2="102" y2="64" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.4" />
+    <line x1="20" y1="64" x2="26" y2="64" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.4" />
+
+    <!-- Needle Group (Rotated 45deg toward upper-right) -->
+    <g transform="rotate(45, 64, 64)">
+      <!-- North Pointer -->
+      <polygon points="64,64 56,64 64,22" fill="url(#needleNorthLightLg)" />
+      <polygon points="64,64 72,64 64,22" fill="url(#needleNorthDarkLg)" />
+      <!-- South Pointer -->
+      <polygon points="64,64 56,64 64,96" fill="url(#needleSouthLightLg)" />
+      <polygon points="64,64 72,64 64,96" fill="url(#needleSouthDarkLg)" />
+
+      <!-- Center Pivot -->
+      <circle cx="64" cy="64" r="7" fill="#FFFFFF" />
+      <circle cx="64" cy="64" r="3.5" fill="#0284C7" />
+    </g>
+
+    <!-- Guiding Star at North-East Target -->
+    <g transform="translate(93, 35)" filter="url(#starGlow)">
+      <path d="M 0,-8 Q 1,-1 7,0 Q 1,1 0,8 Q -1,1 -7,0 Q -1,-1 0,-8 Z" fill="#FFFFFF" />
+    </g>
+  </g>
+
+  <!-- ==================== TYPOGRAPHY (Right) ==================== -->
+  <g transform="translate(164, 0)">
+    <!-- Wordmark: Career Compass -->
+    <text x="0" y="82" font-family="'Poppins', 'Inter', -apple-system, sans-serif" font-size="44" font-weight="800" fill="#14213D" letter-spacing="-0.5">
+      Career <tspan fill="#2563EB">Compass</tspan>
+    </text>
+
+    <!-- AI Pill Badge -->
+    <rect x="408" y="48" width="38" height="24" rx="12" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1.5" />
+    <text x="427" y="65" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#2563EB" text-anchor="middle">AI</text>
+
+    <!-- Tagline -->
+    <text x="2" y="114" font-family="'Inter', sans-serif" font-size="16" font-weight="500" fill="#64748B" letter-spacing="0.2">
+      Discover Your Interests. Explore Your Future.
+    </text>
+  </g>
+</svg>
